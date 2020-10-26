@@ -9,5 +9,11 @@ public class Goal : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         isWin = true;
+
+        GameObject ball = GameObject.Find("Ball");
+
+        ball.GetComponent<Rigidbody>().constraints =
+            RigidbodyConstraints.FreezePositionX
+            | RigidbodyConstraints.FreezePositionZ;
     }
 }

@@ -32,6 +32,12 @@ public class RollABall : MonoBehaviour
             Invoke("NextLevel", 2f);
             Goal.isWin = false;
         }
+
+        if (Hole.isLose)
+        {
+            Invoke("StartLevel", 2f);
+            Hole.isLose = false;
+        }
     }
 
     void NextLevel()
