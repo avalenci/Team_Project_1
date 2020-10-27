@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RollABall : MonoBehaviour
 {
     public GameObject[] boards;
     public Text uiTime;
+    public Text uiLives;
 
+    public int lives = 3;
     public double subTime;
     public bool stopTimer = false;
     public int level;
@@ -22,6 +25,14 @@ public class RollABall : MonoBehaviour
 
     void StartLevel()
     {
+        stopTimer = false;
+        subTime = Time.time;
+
+        if (lives == 0)
+        {
+            SceneManager.LoadScene("Play_Scene");
+        }
+
         if (board != null)
         {
             Destroy(board);
@@ -30,7 +41,7 @@ public class RollABall : MonoBehaviour
         board = Instantiate<GameObject>(boards[level]);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (Goal.isWin)
         {
@@ -43,24 +54,25 @@ public class RollABall : MonoBehaviour
         {
             Invoke("StartLevel", 2f);
             Hole.isLose = false;
+            lives--;
+            stopTimer = true;
         }
 
-        if (!stopTimer)
-        {
-            UpdateGUI();
-        }
+        UpdateGUI();
     }
 
     void UpdateGUI()
     {
-        uiTime.text = "Time: " + (int)(Time.time - subTime);
+        if (!stopTimer)
+        {
+            uiTime.text = "Time: " + (int)(Time.time - subTime);
+        }
+        uiLives.text = "Lives: " + lives;
     }
 
     void NextLevel()
     {
         level++;
-        stopTimer = false;
-        subTime = Time.time;
         StartLevel();
     }
 }
