@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RollABall : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class RollABall : MonoBehaviour
     public Text uiLives;
     public Text uiLevel;
     public Text uiScore;
+    public Button uiReset;
 
     public int lives = 1;
     public double subTime;
@@ -48,6 +50,7 @@ public class RollABall : MonoBehaviour
 
     void StartLevel()
     {
+        uiReset.enabled = true;
         stopTimer = false;
 
         if (lives == 0 || level == boards.Length)
@@ -79,8 +82,15 @@ public class RollABall : MonoBehaviour
             uiScore.text += "\nNew Highscore!";
             PlayerPrefs.SetInt("BestTime", bestTime);
         }
+        uiReset.enabled = false;
         stopTimer = true;
         gameOver = true;
+    }
+
+    public void StartOver()
+    {
+        stopTimer = true;
+        SceneManager.LoadScene("Play_Scene");
     }
 
     void FixedUpdate()
