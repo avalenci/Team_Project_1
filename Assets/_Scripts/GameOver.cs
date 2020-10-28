@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
-    public float currentTime = 0.0f, executedTime = 0.0f, timeToWait = 2.0f;
+    public float currentTime = 0.0f, executedTime = 0.0f, timeToWait = 1.0f;
     public Text text;
     public Button button;
     public Image image;

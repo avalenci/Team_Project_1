@@ -9,6 +9,7 @@ public class RollABall : MonoBehaviour
     public Text uiTime;
     public Text uiLives;
     public Text uiLevel;
+    public Text uiScore;
 
     public int lives = 1;
     public double subTime;
@@ -23,6 +24,23 @@ public class RollABall : MonoBehaviour
 
     void Start()
     {
+        if (PlayerPrefs.HasKey("HighestLevel"))
+        {
+            highestLevel = PlayerPrefs.GetInt("HighestLevel");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("HighestLevel", 0);
+        }
+        if (PlayerPrefs.HasKey("BestTime"))
+        {
+            bestTime = PlayerPrefs.GetInt("BestTime");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("BestTime", 1000000);
+        }
+
         subTime = Time.time;
         level = 0;
         StartLevel();
@@ -43,19 +61,23 @@ public class RollABall : MonoBehaviour
             Destroy(board);
         }
 
-        board = Instantiate<GameObject>(boards[level]);
+        board = Instantiate(boards[level]);
     }
 
     void GameOver()
     {
+        uiScore.text = string.Format("Level: {0} Time: {1}", level, time);
+
         if (level > highestLevel)
         {
             highestLevel = level;
-            highScore = true;
+            uiScore.text += "\nNew Highscore!";
+            PlayerPrefs.SetInt("HighestLevel", highestLevel);
         } else if (level == highestLevel && time < bestTime)
         {
             bestTime = time;
-            highScore = true;
+            uiScore.text += "\nNew Highscore!";
+            PlayerPrefs.SetInt("BestTime", bestTime);
         }
         stopTimer = true;
         gameOver = true;
@@ -86,7 +108,7 @@ public class RollABall : MonoBehaviour
             uiTime.text = "Time: " + (int)(Time.time - subTime);
         }
         uiLives.text = "Lives: " + lives;
-        uiLevel.text = "Level " + (level + 1)          ;
+        uiLevel.text = "Level " + (level + 1);
     }
 
     void NextLevel()
