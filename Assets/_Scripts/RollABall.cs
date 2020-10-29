@@ -50,7 +50,6 @@ public class RollABall : MonoBehaviour
 
     void StartLevel()
     {
-        uiReset.enabled = true;
         stopTimer = false;
 
         if (lives == 0 || level == boards.Length)
@@ -69,7 +68,7 @@ public class RollABall : MonoBehaviour
 
     void GameOver()
     {
-        uiScore.text = string.Format("Level: {0} Time: {1}", level, time);
+        uiScore.text = string.Format("Level: {0}\nTime: {1}", level, time);
 
         if (level > highestLevel)
         {
@@ -82,7 +81,6 @@ public class RollABall : MonoBehaviour
             uiScore.text += "\nNew Highscore!";
             PlayerPrefs.SetInt("BestTime", bestTime);
         }
-        uiReset.enabled = false;
         stopTimer = true;
         gameOver = true;
     }
@@ -90,6 +88,7 @@ public class RollABall : MonoBehaviour
     public void StartOver()
     {
         stopTimer = true;
+        gameOver = false;
         SceneManager.LoadScene("Play_Scene");
     }
 
