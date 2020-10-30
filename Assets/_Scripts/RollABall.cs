@@ -68,13 +68,15 @@ public class RollABall : MonoBehaviour
 
     void GameOver()
     {
-        uiScore.text = string.Format("Level: {0}\nTime: {1}", level, time);
+        uiScore.text = string.Format("Time: {0}", time);
 
         if (level > highestLevel)
         {
             highestLevel = level;
+            bestTime = time;
             uiScore.text += "\nNew Highscore!";
             PlayerPrefs.SetInt("HighestLevel", highestLevel);
+            PlayerPrefs.SetInt("BestTime", bestTime);
         } else if (level == highestLevel && time < bestTime)
         {
             bestTime = time;
