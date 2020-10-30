@@ -664,12 +664,15 @@ MonoBehaviour:
   - {fileID: 2634455519580098187, guid: f169c31669d5844d9a50c6cfe04c1eff, type: 3}
   - {fileID: 2634455519580098187, guid: 7ed6c8139e1fc4dfcbc35768473f2b5c, type: 3}
   - {fileID: 2634455519580098187, guid: 78964fa5456af46668726c2a4ae57695, type: 3}
+  - {fileID: 2634455519580098187, guid: 93d936153c07f4dc4a3b90197bbc00ac, type: 3}
+  - {fileID: 2634455519580098187, guid: 58a562b0b4ac7435c942fdc809d6215c, type: 3}
+  - {fileID: 2634455519580098187, guid: bc83df93e457d4e54be600ba2b050efc, type: 3}
   uiTime: {fileID: 441628486}
   uiLives: {fileID: 1101861295}
   uiLevel: {fileID: 1079494454}
   uiScore: {fileID: 425179869}
   uiReset: {fileID: 933111602}
-  lives: 2
+  lives: 3
   subTime: 0
   stopTimer: 0
   level: 0
